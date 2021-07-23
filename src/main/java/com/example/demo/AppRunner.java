@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 @Component
 public class AppRunner implements ApplicationRunner {
+
     @Autowired
     private StudentDao studentDao;
 

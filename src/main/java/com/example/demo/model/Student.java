@@ -1,11 +1,10 @@
 package com.example.demo.model;
 
+import com.example.demo.util.CustomInteger;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -19,9 +18,9 @@ public class Student implements Serializable {
     private static final long serialVersionUID = -1080187374859011413L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id", unique = true, nullable = false, precision = 10)
-    private Integer studentId;
+    @Type(type = "com.example.demo.util.CustomInteger")
+    private CustomInteger studentId;
 
     @Column(name = "student_name", nullable = false)
     private String studentName;
@@ -29,16 +28,24 @@ public class Student implements Serializable {
     @Column(name = "student_age",nullable = false)
     private int studentAge;
 
+    public Student(){
+        studentId = new CustomInteger();
+    }
+
     public int getStudentAge() {
         return studentAge;
     }
 
     public Integer getStudentId() {
-        return studentId;
+        return studentId.getValue();
     }
 
     public String getStudentName() {
         return studentName;
+    }
+
+    public void clearPrimaryId() {
+        this.studentId.setValue(null);
     }
 
     public void setStudentAge(int studentAge) {
@@ -46,7 +53,7 @@ public class Student implements Serializable {
     }
 
     public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+        this.studentId = new CustomInteger(studentId);
     }
 
     public void setStudentName(String studentName) {
