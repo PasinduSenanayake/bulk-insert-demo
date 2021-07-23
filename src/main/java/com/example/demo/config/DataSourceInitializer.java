@@ -54,8 +54,8 @@ public class DataSourceInitializer {
             final HikariDataSource hikariDataSource = DataSourceBuilder
                     .create()
                     .type(HikariDataSource.class)
-                    .username("root")
-                    .password("asdfjklp1")
+                    .username("username")
+                    .password("password")
                     .url(url)
                     .build();
 
